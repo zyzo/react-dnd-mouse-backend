@@ -28,10 +28,6 @@ export default class MouseBackend {
     this.addEventListeners(window)
   }
 
-  addEventListeners(window) {
-
-  }
-
   teardown() {
     if (typeof window === 'undefined') {
       return
@@ -69,14 +65,11 @@ export default class MouseBackend {
   }
 
   connectDropTarget(targetId, node) {
-    const handleDragEnter =
-      () => this.handleDragEnter(targetId)
+    this.targetNodes[targetId] = node
 
-    const handleDrop =
-      () => this.handleDrop(tartgetId)
-
-    node.addEventListener('mouseover', handleDragEnter)
-    
+    return () => {
+      delete this.targetNodes[targetId]
+    }
   }
 
 
