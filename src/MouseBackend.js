@@ -12,7 +12,6 @@ export default class MouseBackend {
 
     this.handleMoveStart = this.handleMoveStart.bind(this)
 
-    this.handle
   }
 
   setup() {
@@ -71,6 +70,5 @@ export default class MouseBackend {
       delete this.targetNodes[targetId]
     }
   }
-
 
 }

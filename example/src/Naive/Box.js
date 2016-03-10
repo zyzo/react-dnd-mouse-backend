@@ -20,7 +20,9 @@ const boxSource = {
 class Box extends Component {
 
   render() {
-    const { hideSourceOnDrag, left, top, connectDragSource, isDragging, children } = this.props
+    const {
+      hideSourceOnDrag, left, top, connectDragSource, isDragging, children
+    } = this.props
     if (isDragging && hideSourceOnDrag) {
       return null
     }
