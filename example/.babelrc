@@ -19,7 +19,6 @@
     ["transform-es2015-destructuring", { "loose": true }],
     "transform-es2015-block-scoping",
     "transform-object-rest-spread",
-    "transform-decorators",
     "transform-class-properties"
   ],
   "env": {

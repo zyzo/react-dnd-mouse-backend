@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node node_modules/webpack-dev-server/bin/webpack-dev-server.js --hot --port 3030",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

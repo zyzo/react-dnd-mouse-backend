@@ -3,6 +3,7 @@ import update from 'react/lib/update'
 import ItemTypes from './ItemTypes'
 import Box from './Box'
 import { DropTarget, DragDropContext } from 'react-dnd'
+import MouseBackend from 'react-dnd-mouse-backend'
 import HTML5Backend from 'react-dnd-html5-backend'
 
 const styles = {
@@ -76,7 +77,7 @@ Container.propTypes = {
   connectDropTarget: PropTypes.func.isRequired
 }
 
-export default DragDropContext(HTML5Backend)(
+export default DragDropContext(MouseBackend)(
 DropTarget(ItemTypes.BOX, boxTarget, connect => ({
   connectDropTarget: connect.dropTarget()
 }))(Container))
