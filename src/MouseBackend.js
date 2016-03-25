@@ -22,7 +22,6 @@ function getNodeClientOffset (node) {
 
 export default class MouseBackend {
   constructor(manager) {
-    console.log('constructor')
     this.actions = manager.getActions()
     this.monitor = manager.getMonitor()
     this.registry = manager.getRegistry()
@@ -48,7 +47,6 @@ export default class MouseBackend {
   }
 
   setup() {
-    console.log('setup')
     if (typeof window === 'undefined') {
       return
     }
@@ -73,7 +71,6 @@ export default class MouseBackend {
   }
 
   teardown() {
-    console.log('teardown')
     if (typeof window === 'undefined') {
       return
     }
@@ -92,12 +89,10 @@ export default class MouseBackend {
   }
 
   connectDragSource(sourceId, node, options) {
-    console.log('connectDragSource zaeaze')
     this.sourceNodes[sourceId] = node
 
     const handleMoveStart =
       this.handleMoveStart.bind(this, sourceId)
-    console.log(node)
     node.addEventListener('mousedown',
       handleMoveStart)
 
@@ -108,7 +103,6 @@ export default class MouseBackend {
   }
 
   connectDragPreview(sourceId, node, options) {
-    console.log('connectDragPreview')
     this.sourcePreviewNodeOptions[sourceId] = options
     this.sourcePreviewNodes[sourceId] = node
 
@@ -119,7 +113,6 @@ export default class MouseBackend {
   }
 
   connectDropTarget(targetId, node) {
-    console.log('connectDropTarget')
     this.targetNodes[targetId] = node
 
     return () => {
@@ -128,17 +121,14 @@ export default class MouseBackend {
   }
 
   handleWindowMoveStartCapture() {
-    console.log('handleWindowMoveStartCapture')
     this.moveStartSourceIds = []
   }
 
   handleMoveStart (sourceId) {
-    console.log('handleMoveStart')
     this.moveStartSourceIds.unshift(sourceId)
   }
 
   handleWindowMoveStart(e) {
-    console.log('handleWindowMoveStart')
     const clientOffset = getEventClientOffset(e)
     if (clientOffset) {
       this.mouseClientOffset = clientOffset
@@ -146,13 +136,11 @@ export default class MouseBackend {
   }
 
   handleWindowMoveCapture (e) {
-    console.log('handleWindowMoveCapture')
     const { moveStartSourceIds } = this
     const clientOffset = getEventClientOffset(e)
 
     if (!clientOffset)
       return
-    console.log(clientOffset)
     if (!this.monitor.isDragging()
       && this.mouseClientOffset.hasOwnProperty('x') && moveStartSourceIds &&
     (
@@ -194,7 +182,6 @@ export default class MouseBackend {
   }
 
   handleWindowMoveEndCapture (e) {
-    console.log('handleWindowMoveEndCapture')
     if (!this.monitor.isDragging() || this.monitor.didDrop()) {
       this.moveStartSourceIds = null
       return

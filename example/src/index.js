@@ -6,7 +6,6 @@ import CSV from './CSV'
 
 render(
   <div>
-    {/*<Naive />*/}
     <CSV />
   </div>,
   document.getElementById('root')

@@ -77,7 +77,7 @@ Container.propTypes = {
   connectDropTarget: PropTypes.func.isRequired
 }
 
-export default DragDropContext(MouseBackend)(
+export default DragDropContext(Touch({enableMouseEvents: true}))(
 DropTarget(ItemTypes.BOX, boxTarget, connect => ({
   connectDropTarget: connect.dropTarget()
 }))(Container))
