@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import update from 'react/lib/update'
 import ItemTypes from '../ItemTypes'
-import Box from './Box'
+import Source from './Source'
 import { DropTarget, DragDropContext } from 'react-dnd'
 import MouseBackend from 'react-dnd-mouse-backend'
 import Touch from 'react-dnd-touch-backend'
@@ -55,18 +55,20 @@ class Container extends Component {
 
     return connectDropTarget(
       <div style={styles}>
+        <svg style={{width:'100%', height:'100%'}}>
         {Object.keys(boxes).map(key => {
           const { left, top, title } = boxes[key]
           return (
-            <Box key={key}
+            <Source key={key}
                  id={key}
                  left={left}
                  top={top}
                  hideSourceOnDrag={hideSourceOnDrag}>
               {title}
-            </Box>
+            </Source>
           )
         })}
+        </svg>
       </div>
     )
   }
@@ -78,6 +80,6 @@ Container.propTypes = {
 }
 
 export default DragDropContext(MouseBackend)(
-DropTarget(ItemTypes.BOX, boxTarget, connect => ({
+DropTarget(ItemTypes.CSV, boxTarget, connect => ({
   connectDropTarget: connect.dropTarget()
 }))(Container))

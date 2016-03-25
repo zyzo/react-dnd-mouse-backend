@@ -17,7 +17,7 @@ const boxSource = {
   }
 }
 
-class Box extends Component {
+class Source extends Component {
 
   render() {
     const {
@@ -28,14 +28,12 @@ class Box extends Component {
     }
 
     return connectDragSource(
-      <div style={{ ...style, left, top }}>
-        {children}
-      </div>
+        <circle cx={left} cy={top} r={12} fill="black"/>
     )
   }
 }
 
-Box.propTypes = {
+Source.propTypes = {
   connectDragSource: PropTypes.func.isRequired,
   isDragging: PropTypes.bool.isRequired,
   id: PropTypes.any.isRequired,
@@ -45,7 +43,7 @@ Box.propTypes = {
   children: PropTypes.node
 }
 
-export default DragSource(ItemTypes.BOX, boxSource, (connect, monitor) => ({
+export default DragSource(ItemTypes.CSV, boxSource, (connect, monitor) => ({
   connectDragSource: connect.dragSource(),
   isDragging: monitor.isDragging()
-}))(Box)
+}))(Source)

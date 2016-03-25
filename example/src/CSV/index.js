@@ -1,8 +1,8 @@
 /* eslint-disable max-len */
 import React, { Component } from 'react'
-import Container from './Container'
+import Container from './Target'
 
-export default class DragAroundNaive extends Component {
+export default class DragAroundCSV extends Component {
   constructor(props) {
     super(props)
     this.handleHideSourceClick = this.handleHideSourceClick.bind(this)

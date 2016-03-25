@@ -6,6 +6,20 @@ function getEventClientOffset (e) {
   }
 }
 
+const ELEMENT_NODE = 1
+function getNodeClientOffset (node) {
+  const el = node.nodeType === ELEMENT_NODE
+    ? node
+    : node.parentElement
+
+  if (!el) {
+    return null
+  }
+
+  const { top, left } = el.getBoundingClientRect()
+  return { x: left, y: top }
+}
+
 export default class MouseBackend {
   constructor(manager) {
     console.log('constructor')
@@ -21,6 +35,8 @@ export default class MouseBackend {
     this.targetNodeOptions = {}
     this.mouseClientOffset = {}
 
+    this.getSourceClientOffset = this.getSourceClientOffset.bind(this)
+
     this.handleWindowMoveStart =
       this.handleWindowMoveStart.bind(this)
     this.handleWindowMoveStartCapture =
@@ -28,7 +44,7 @@ export default class MouseBackend {
     this.handleWindowMoveCapture =
       this.handleWindowMoveCapture.bind(this)
     this.handleWindowMoveEndCapture =
-      this.handleWindowMoveCapture.bind(this)
+      this.handleWindowMoveEndCapture.bind(this)
   }
 
   setup() {
@@ -45,11 +61,15 @@ export default class MouseBackend {
     window.addEventListener('mousedown',
       this.handleWindowMoveStartCapture, true)
     window.addEventListener('mousedown',
-      this.handleWindowMoveStart, true)
+      this.handleWindowMoveStart)
     window.addEventListener('mousemove',
       this.handleWindowMoveCapture, true)
     window.addEventListener('mouseup',
       this.handleWindowMoveEndCapture, true)
+  }
+
+  getSourceClientOffset (sourceId) {
+    return getNodeClientOffset(this.sourceNodes[sourceId])
   }
 
   teardown() {
@@ -59,10 +79,12 @@ export default class MouseBackend {
     }
 
     this.constructor.isSetUp = false
+
+    this.mouseClientOffset = {}
     window.removeEventListener(
       'mousedown', this.handleWindowMoveStartCapture, true)
     window.removeEventListener(
-      'mousedown', this.handleWindowMoveStart, true)
+      'mousedown', this.handleWindowMoveStart)
     window.removeEventListener(
       'mousemove', this.handleWindowMoveCapture, true)
     window.removeEventListener(
@@ -70,19 +92,18 @@ export default class MouseBackend {
   }
 
   connectDragSource(sourceId, node, options) {
-    console.log('connectDragSource')
+    console.log('connectDragSource zaeaze')
     this.sourceNodes[sourceId] = node
 
     const handleMoveStart =
       this.handleMoveStart.bind(this, sourceId)
-
-    node.addEventListener('onmousedown',
+    console.log(node)
+    node.addEventListener('mousedown',
       handleMoveStart)
 
     return () => {
       delete this.sourceNodes[sourceId]
-      delete this.sourceNodeOptions[sourceId]
-      node.removeEventListener('onmousedown', handleMoveStart)
+      node.removeEventListener('mousedown', handleMoveStart)
     }
   }
 
@@ -131,7 +152,7 @@ export default class MouseBackend {
 
     if (!clientOffset)
       return
-
+    console.log(clientOffset)
     if (!this.monitor.isDragging()
       && this.mouseClientOffset.hasOwnProperty('x') && moveStartSourceIds &&
     (
@@ -149,6 +170,7 @@ export default class MouseBackend {
       return
     }
 
+    const sourceNode = this.sourceNodes[this.monitor.getSourceId()]
     this.installSourceNodeRemovalObserver(sourceNode)
 
     this.actions.publishDragSource()
@@ -171,7 +193,7 @@ export default class MouseBackend {
     })
   }
 
-  handleWindowMoveEndCapture () {
+  handleWindowMoveEndCapture (e) {
     console.log('handleWindowMoveEndCapture')
     if (!this.monitor.isDragging() || this.monitor.didDrop()) {
       this.moveStartSourceIds = null
@@ -184,7 +206,7 @@ export default class MouseBackend {
 
     this.uninstallSourceNodeRemovalObserver()
     this.actions.drop()
-    this.acions.endDrag()
+    this.actions.endDrag()
   }
 
   installSourceNodeRemovalObserver (node) {

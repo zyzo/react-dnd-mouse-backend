@@ -51,7 +51,6 @@
    "semi-spacing": 2,
    "no-var": 2,
    "semi": [2, "never"],
-   "no-underscore-dangle": 2,
    "no-use-before-define": 2,
    "eol-last": 2,
    "quotes": [2, "single"],
