@@ -1,6 +1,8 @@
 /* eslint-disable max-len */
 import React, { Component } from 'react'
+
 import Container from './Target'
+import Source from './Source'
 
 export default class DragAroundCSV extends Component {
   constructor(props) {

@@ -88,7 +88,7 @@ export default class MouseBackend {
       'mouseup', this.handleWindowMoveEndCapture, true)
   }
 
-  connectDragSource(sourceId, node, options) {
+  connectDragSource(sourceId, node) {
     this.sourceNodes[sourceId] = node
 
     const handleMoveStart =
@@ -138,7 +138,6 @@ export default class MouseBackend {
   handleWindowMoveCapture (e) {
     const { moveStartSourceIds } = this
     const clientOffset = getEventClientOffset(e)
-
     if (!clientOffset)
       return
     if (!this.monitor.isDragging()

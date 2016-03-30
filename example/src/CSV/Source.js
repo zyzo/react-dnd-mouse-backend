@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import ItemTypes from '../ItemTypes'
 import { DragSource } from 'react-dnd'
-
+import { connect} from 'react-redux'
 const style = {
   position: 'absolute',
   border: '1px dashed gray',
@@ -46,4 +46,4 @@ Source.propTypes = {
 export default DragSource(ItemTypes.CSV, boxSource, (connect, monitor) => ({
   connectDragSource: connect.dragSource(),
   isDragging: monitor.isDragging()
-}))(Source)
+}))(connect()(Source))

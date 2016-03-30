@@ -5,7 +5,7 @@ import Source from './Source'
 import { DropTarget, DragDropContext } from 'react-dnd'
 import MouseBackend from 'react-dnd-mouse-backend'
 import Touch from 'react-dnd-touch-backend'
-
+import { connect} from 'react-redux'
 const styles = {
   width: 300,
   height: 300,
@@ -55,6 +55,10 @@ class Container extends Component {
 
     return connectDropTarget(
       <div style={styles}>
+        <div style={{height: '50%'}}>
+        <svg><Source left={12} top={13}>adz</Source></svg>
+        </div>
+        <div style={{height: '50%'}}>
         <svg style={{width:'100%', height:'100%'}}>
         {Object.keys(boxes).map(key => {
           const { left, top, title } = boxes[key]
@@ -69,6 +73,7 @@ class Container extends Component {
           )
         })}
         </svg>
+        </div>
       </div>
     )
   }
@@ -79,7 +84,7 @@ Container.propTypes = {
   connectDropTarget: PropTypes.func.isRequired
 }
 
-export default DragDropContext(MouseBackend)(
+export default connect()(DragDropContext(MouseBackend)(
 DropTarget(ItemTypes.CSV, boxTarget, connect => ({
   connectDropTarget: connect.dropTarget()
-}))(Container))
+}))(Container)))
