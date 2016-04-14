@@ -133,7 +133,10 @@ export default class MouseBackend {
     if (clientOffset) {
       this.mouseClientOffset = clientOffset
     }
-    e.preventDefault()
+    console.log(e.target.tagName)
+    if (e.target.tagName != 'INPUT') {
+      e.preventDefault()
+    }
   }
 
   handleWindowMoveCapture (e) {
