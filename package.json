@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zyzo/react-dnd-svg.git"
+    "url": "git+https://github.com/zyzo/react-dnd-mouse-backend.git"
   },
   "keywords": [
     "react",
@@ -28,9 +28,9 @@
   "author": "zyzo",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/zyzo/react-dnd-svg/issues"
+    "url": "https://github.com/zyzo/react-dnd-mouse-backend/issues"
   },
-  "homepage": "https://github.com/zyzo/react-dnd-svg#readme",
+  "homepage": "https://github.com/zyzo/react-dnd-mouse-backend#readme",
   "dependencies": {
     "react-dnd": "^2.1.2"
   },
