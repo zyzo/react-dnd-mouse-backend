@@ -133,7 +133,6 @@ export default class MouseBackend {
     if (clientOffset) {
       this.mouseClientOffset = clientOffset
     }
-    console.log(e.target.tagName)
     if (e.target.tagName != 'INPUT') {
       e.preventDefault()
     }
