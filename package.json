@@ -3,9 +3,6 @@
   "version": "0.0.1",
   "description": "A lightweight attempt for solving the whole HTML5 DnD - svg tags compability issue",
   "main": "lib/index.js",
-  "engines": {
-    "node": "0.12.x"
-  },
   "scripts": {
     "lint": "node node_modules/eslint/bin/eslint.js .",
     "clean": "rimraf lib",
