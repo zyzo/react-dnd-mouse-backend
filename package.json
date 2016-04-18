@@ -1,6 +1,6 @@
 {
   "name": "react-dnd-mouse-backend",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "A lightweight attempt for solving the whole HTML5 DnD - svg tags compability issue",
   "main": "lib/index.js",
   "scripts": {
@@ -9,11 +9,12 @@
     "build:lib": "node node_modules/babel-cli/bin/babel.js --presets es2015 src --out-dir lib",
     "build:umd": "node node_modules/webpack/bin/webpack.js",
     "build": "npm run build:lib && npm run build:umd",
+    "prepublish": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zyzo/react-dnd-svg.git"
+    "url": "git+https://github.com/zyzo/react-dnd-mouse-backend.git"
   },
   "keywords": [
     "react",
@@ -24,9 +25,9 @@
   "author": "zyzo",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/zyzo/react-dnd-svg/issues"
+    "url": "https://github.com/zyzo/react-dnd-mouse-backend/issues"
   },
-  "homepage": "https://github.com/zyzo/react-dnd-svg#readme",
+  "homepage": "https://github.com/zyzo/react-dnd-mouse-backend#readme",
   "dependencies": {
     "react-dnd": "^2.1.2"
   },
