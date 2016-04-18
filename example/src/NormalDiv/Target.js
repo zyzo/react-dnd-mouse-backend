@@ -1,10 +1,8 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PropTypes } from 'react'
 import update from 'react/lib/update'
 import ItemTypes from '../ItemTypes'
-import Box from './Box'
-import { DropTarget, DragDropContext } from 'react-dnd'
-import MouseBackend from 'react-dnd-mouse-backend'
-import Touch from 'react-dnd-touch-backend'
+import Source from './Source'
+import { DropTarget } from 'react-dnd'
 
 const styles = {
   width: 300,
@@ -24,17 +22,16 @@ const boxTarget = {
   }
 }
 
-class Container extends Component {
+const Target = React.createClass({
 
-  constructor(props) {
-    super(props)
-    this.state = {
+  getInitialState() {
+    return {
       boxes: {
         'a': { top: 20, left: 80, title: 'Drag me around' },
         'b': { top: 180, left: 20, title: 'Drag me too' }
       }
     }
-  }
+  },
 
   moveBox(id, left, top) {
     this.setState(update(this.state, {
@@ -47,7 +44,7 @@ class Container extends Component {
         }
       }
     }))
-  }
+  },
 
   render() {
     const { hideSourceOnDrag, connectDropTarget } = this.props
@@ -58,26 +55,25 @@ class Container extends Component {
         {Object.keys(boxes).map(key => {
           const { left, top, title } = boxes[key]
           return (
-            <Box key={key}
+            <Source key={key}
                  id={key}
                  left={left}
                  top={top}
                  hideSourceOnDrag={hideSourceOnDrag}>
               {title}
-            </Box>
+            </Source>
           )
         })}
       </div>
     )
   }
-}
+})
 
-Container.propTypes = {
+Target.propTypes = {
   hideSourceOnDrag: PropTypes.bool.isRequired,
   connectDropTarget: PropTypes.func.isRequired
 }
 
-export default DragDropContext(Touch({enableMouseEvents: true}))(
-DropTarget(ItemTypes.BOX, boxTarget, connect => ({
+export default DropTarget(ItemTypes.BOX, boxTarget, connect => ({
   connectDropTarget: connect.dropTarget()
-}))(Container))
+}))(Target)

@@ -1,37 +1,37 @@
 /* eslint-disable max-len */
-import React, { Component } from 'react'
-import Container from './Container'
+import React from 'react'
+import Target from './Target'
 
-export default class DragAroundNaive extends Component {
-  constructor(props) {
-    super(props)
-    this.handleHideSourceClick = this.handleHideSourceClick.bind(this)
-    this.state = {
+const DragAroundNaive = React.createClass({
+  getInitialState() {
+    return {
       hideSourceOnDrag: true
     }
-  }
+  },
 
   handleHideSourceClick() {
     this.setState({
       hideSourceOnDrag: !this.state.hideSourceOnDrag
     })
-  }
+  },
 
   render() {
     const { hideSourceOnDrag } = this.state
 
     return (
       <div>
-        <Container hideSourceOnDrag={hideSourceOnDrag} />
+        <Target hideSourceOnDrag={hideSourceOnDrag} />
         <p>
           <label>
             <input type="checkbox"
                    checked={hideSourceOnDrag}
                    onChange={this.handleHideSourceClick} />
-            <small>Hide the source item while dragging</small>
+            <small>Hide source while dragging</small>
           </label>
         </p>
       </div>
     )
   }
-}
+})
+
+export default DragAroundNaive
