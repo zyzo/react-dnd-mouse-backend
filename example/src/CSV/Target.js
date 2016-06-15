@@ -35,7 +35,7 @@ const Target = React.createClass({
 
   moveBox(id, left, top) {
     this.setState(update(this.state, {
-      boxes: {
+      circles: {
         [id]: {
           $merge: {
             left: left,
