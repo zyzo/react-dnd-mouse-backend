@@ -103,12 +103,12 @@ export default class MouseBackend {
   }
 
   connectDragPreview(sourceId, node, options) {
-    this.sourcePreviewNodeOptions[sourceId] = options
+    this.sourcePreviewNodesOptions[sourceId] = options
     this.sourcePreviewNodes[sourceId] = node
 
     return () => {
       delete this.sourcePreviewNodes[sourceId]
-      delete this.sourcePreviewNodeOptions[sourceId]
+      delete this.sourcePreviewNodesOptions[sourceId]
     }
   }
 
