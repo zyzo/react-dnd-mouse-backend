@@ -44,6 +44,8 @@ export default class MouseBackend {
       this.handleWindowMoveCapture.bind(this)
     this.handleWindowMoveEndCapture =
       this.handleWindowMoveEndCapture.bind(this)
+    this.handleWindowClick =
+      this.handleWindowClick.bind(this)
   }
 
   setup() {
@@ -64,6 +66,8 @@ export default class MouseBackend {
       this.handleWindowMoveCapture, true)
     window.addEventListener('mouseup',
       this.handleWindowMoveEndCapture, true)
+    window.addEventListener('click',
+      this.handleWindowClick, true)
   }
 
   getSourceClientOffset (sourceId) {
@@ -86,6 +90,8 @@ export default class MouseBackend {
       'mousemove', this.handleWindowMoveCapture, true)
     window.removeEventListener(
       'mouseup', this.handleWindowMoveEndCapture, true)
+    window.removeEventListener(
+      'click', this.handleWindowClick, true)
   }
 
   connectDragSource(sourceId, node) {
@@ -187,6 +193,7 @@ export default class MouseBackend {
       this.moveStartSourceIds = null
       return
     }
+    this.preventClick = true
 
     e.preventDefault()
 
@@ -195,6 +202,11 @@ export default class MouseBackend {
     this.uninstallSourceNodeRemovalObserver()
     this.actions.drop()
     this.actions.endDrag()
+  }
+
+  handleWindowClick(e) {
+    if (this.preventClick) e.stopPropagation()
+    this.preventClick = false
   }
 
   installSourceNodeRemovalObserver (node) {
