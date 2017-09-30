@@ -124,7 +124,9 @@ export default class MouseBackend {
     this.moveStartSourceIds = []
   }
 
-  handleMoveStart (sourceId) {
+  handleMoveStart (sourceId, e) {
+    // Ignore right mouse button.
+    if (e.which === 3) return
     this.moveStartSourceIds.unshift(sourceId)
   }
 
