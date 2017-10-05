@@ -4,7 +4,7 @@
 
 Mouse Backend for React Drag and Drop library http://gaearon.github.io/react-dnd
 
-### Usage
+### Usage
 
 ```js
 import { DragDropContext } from 'react-dnd'
