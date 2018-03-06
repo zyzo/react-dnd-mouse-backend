@@ -133,6 +133,7 @@ export default class MouseBackend {
     if (clientOffset) {
       this.mouseClientOffset = clientOffset
     }
+    e.preventDefault();
   }
 
   handleWindowMoveCapture (e) {
