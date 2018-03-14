@@ -26,11 +26,9 @@ export default class MouseBackend {
     this.monitor = manager.getMonitor()
     this.registry = manager.getRegistry()
 
-    options = {
+    options = Object.assign({
       targetElement: window,
-      preventDefaultOnMouseDown: false,
-      ...options
-    }
+      preventDefaultOnMouseDown: false}, options)
     this.targetElement = options.targetElement
     this.preventDefaultOnMouseDown = options.preventDefaultOnMouseDown
 
