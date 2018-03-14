@@ -27,12 +27,6 @@ export default class MouseBackend {
     this.registry = manager.getRegistry()
     this.context = manager.getContext()
 
-    options = Object.assign({
-      targetElement: window,
-      preventDefaultOnMouseDown: false}, options)
-    // this.targetElement = options.targetElement
-    this.preventDefaultOnMouseDown = options.preventDefaultOnMouseDown
-
     if (this.context && this.context.window) {
       this.targetElement = this.context.window
     } else {
@@ -146,9 +140,7 @@ export default class MouseBackend {
     if (clientOffset) {
       this.mouseClientOffset = clientOffset
     }
-    if(this.preventDefaultOnMouseDown){
-      e.preventDefault()
-    }
+    e.preventDefault()
   }
 
   handleWindowMoveCapture (e) {
