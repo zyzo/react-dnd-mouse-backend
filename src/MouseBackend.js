@@ -21,10 +21,18 @@ function getNodeClientOffset (node) {
 }
 
 export default class MouseBackend {
-  constructor(manager) {
+  constructor(manager, options = {}) {
     this.actions = manager.getActions()
     this.monitor = manager.getMonitor()
     this.registry = manager.getRegistry()
+
+    options = {
+      targetElement: window,
+      preventDefaultOnMouseDown: false,
+      ...options
+    }
+    this.targetElement = options.targetElement
+    this.preventDefaultOnMouseDown = options.preventDefaultOnMouseDown
 
     this.sourceNodes = {}
     this.sourceNodesOptions = {}
@@ -56,13 +64,13 @@ export default class MouseBackend {
     }
 
     this.constructor.isSetUp = true
-    window.addEventListener('mousedown',
+    targetElement.addEventListener('mousedown',
       this.handleWindowMoveStartCapture, true)
-    window.addEventListener('mousedown',
+    targetElement.addEventListener('mousedown',
       this.handleWindowMoveStart)
-    window.addEventListener('mousemove',
+    targetElement.addEventListener('mousemove',
       this.handleWindowMoveCapture, true)
-    window.addEventListener('mouseup',
+    targetElement.addEventListener('mouseup',
       this.handleWindowMoveEndCapture, true)
   }
 
@@ -78,13 +86,13 @@ export default class MouseBackend {
     this.constructor.isSetUp = false
 
     this.mouseClientOffset = {}
-    window.removeEventListener(
+    targetElement.removeEventListener(
       'mousedown', this.handleWindowMoveStartCapture, true)
-    window.removeEventListener(
+    targetElement.removeEventListener(
       'mousedown', this.handleWindowMoveStart)
-    window.removeEventListener(
+    targetElement.removeEventListener(
       'mousemove', this.handleWindowMoveCapture, true)
-    window.removeEventListener(
+    targetElement.removeEventListener(
       'mouseup', this.handleWindowMoveEndCapture, true)
   }
 
@@ -133,7 +141,9 @@ export default class MouseBackend {
     if (clientOffset) {
       this.mouseClientOffset = clientOffset
     }
-    e.preventDefault();
+    if(this.preventDefaultOnMouseDown){
+      e.preventDefault()
+    }
   }
 
   handleWindowMoveCapture (e) {
