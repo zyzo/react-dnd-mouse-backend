@@ -25,12 +25,19 @@ export default class MouseBackend {
     this.actions = manager.getActions()
     this.monitor = manager.getMonitor()
     this.registry = manager.getRegistry()
+    this.context = manager.getContext()
 
     options = Object.assign({
       targetElement: window,
       preventDefaultOnMouseDown: false}, options)
-    this.targetElement = options.targetElement
+    // this.targetElement = options.targetElement
     this.preventDefaultOnMouseDown = options.preventDefaultOnMouseDown
+
+    if (this.context && this.context.window) {
+      this.targetElement = this.context.window
+    } else {
+      this.targetElement = window
+    }
 
     this.sourceNodes = {}
     this.sourceNodesOptions = {}
