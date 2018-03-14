@@ -62,13 +62,13 @@ export default class MouseBackend {
     }
 
     this.constructor.isSetUp = true
-    targetElement.addEventListener('mousedown',
+    this.targetElement.addEventListener('mousedown',
       this.handleWindowMoveStartCapture, true)
-    targetElement.addEventListener('mousedown',
+    this.targetElement.addEventListener('mousedown',
       this.handleWindowMoveStart)
-    targetElement.addEventListener('mousemove',
+    this.targetElement.addEventListener('mousemove',
       this.handleWindowMoveCapture, true)
-    targetElement.addEventListener('mouseup',
+    this.targetElement.addEventListener('mouseup',
       this.handleWindowMoveEndCapture, true)
   }
 
@@ -84,13 +84,13 @@ export default class MouseBackend {
     this.constructor.isSetUp = false
 
     this.mouseClientOffset = {}
-    targetElement.removeEventListener(
+    this.targetElement.removeEventListener(
       'mousedown', this.handleWindowMoveStartCapture, true)
-    targetElement.removeEventListener(
+    this.targetElement.removeEventListener(
       'mousedown', this.handleWindowMoveStart)
-    targetElement.removeEventListener(
+    this.targetElement.removeEventListener(
       'mousemove', this.handleWindowMoveCapture, true)
-    targetElement.removeEventListener(
+    this.targetElement.removeEventListener(
       'mouseup', this.handleWindowMoveEndCapture, true)
   }
 
