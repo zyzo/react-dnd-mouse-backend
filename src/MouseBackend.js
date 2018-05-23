@@ -46,6 +46,8 @@ export default class MouseBackend {
       this.handleWindowMoveEndCapture.bind(this)
     this.handleWindowClick =
       this.handleWindowClick.bind(this)
+    this.handleWindowDragstart =
+      this.handleWindowDragstart.bind(this)
   }
 
   setup() {
@@ -68,6 +70,8 @@ export default class MouseBackend {
       this.handleWindowMoveEndCapture, true)
     window.addEventListener('click',
       this.handleWindowClick, true)
+    window.addEventListener('dragstart',
+      this.handleWindowDragstart, true)
   }
 
   getSourceClientOffset (sourceId) {
@@ -92,6 +96,8 @@ export default class MouseBackend {
       'mouseup', this.handleWindowMoveEndCapture, true)
     window.removeEventListener(
       'click', this.handleWindowClick, true)
+    window.removeEventListener(
+      'dragstart', this.handleWindowDragstart, true)
   }
 
   connectDragSource(sourceId, node) {
@@ -207,6 +213,11 @@ export default class MouseBackend {
   handleWindowClick(e) {
     if (this.preventClick) e.stopPropagation()
     this.preventClick = false
+  }
+
+  // Disable drag on images (Firefox)
+  handleWindowDragstart(e) {
+    e.preventDefault()
   }
 
   installSourceNodeRemovalObserver (node) {
