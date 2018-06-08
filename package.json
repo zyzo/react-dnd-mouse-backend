@@ -28,9 +28,6 @@
     "url": "https://github.com/zyzo/react-dnd-mouse-backend/issues"
   },
   "homepage": "https://github.com/zyzo/react-dnd-mouse-backend#readme",
-  "dependencies": {
-    "react-dnd": "^2.1.2"
-  },
   "devDependencies": {
     "babel": "^6.5.2",
     "babel-cli": "^6.6.5",
