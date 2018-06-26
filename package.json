@@ -10,7 +10,7 @@
     "build:umd": "node node_modules/webpack/bin/webpack.js",
     "build": "npm run build:lib && npm run build:umd",
     "prepublish": "npm run build",
-    "prepare": "npm install && npm run build",
+    "prepare": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
