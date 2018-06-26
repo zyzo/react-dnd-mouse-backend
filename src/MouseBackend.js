@@ -174,9 +174,24 @@ export default class MouseBackend {
           clientOffset.y >= boundingRect.top &&
           clientOffset.y <= boundingRect.bottom
       })
-
+    // vM20180626 to fix handling of hover on nested elements
+    this.sortTargetIds(matchingTargetIds)
     this.actions.hover(matchingTargetIds, {
       clientOffset
+    })
+  }
+
+  sortTargetIds(matchingTargetIds) {
+    // sort so smallest included rect is last in list
+    // to make nested hover work
+    const between = (a, x1, size) => {
+      return x1 <= a && a <= x1 + size
+    }
+    matchingTargetIds.sort((id1, id2) => {
+      const br1 = this.targetNodes[id1].getBoundingClientRect();
+      const br2 = this.targetNodes[id2].getBoundingClientRect();
+      return between(br2.x, br1.x, br1.width) && between(br2.x + br2.width, br1.x, br1.width)
+      && between(br2.y, br1.y, br1.height) && between(br2.y + br2.height, br1.y, br1.height) ? -1 : 1;
     })
   }
 
