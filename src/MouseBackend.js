@@ -188,10 +188,10 @@ export default class MouseBackend {
       return x1 <= a && a <= x1 + size
     }
     matchingTargetIds.sort((id1, id2) => {
-      const br1 = this.targetNodes[id1].getBoundingClientRect();
-      const br2 = this.targetNodes[id2].getBoundingClientRect();
-      return between(br2.x, br1.x, br1.width) && between(br2.x + br2.width, br1.x, br1.width)
-      && between(br2.y, br1.y, br1.height) && between(br2.y + br2.height, br1.y, br1.height) ? -1 : 1;
+      const br1 = this.targetNodes[id1].getBoundingClientRect()
+      const br2 = this.targetNodes[id2].getBoundingClientRect()
+      return between(br2.left, br1.left, br1.width) && between(br2.left + br2.width, br1.left, br1.width)
+      && between(br2.top, br1.top, br1.height) && between(br2.top + br2.height, br1.top, br1.height) ? -1 : 1
     })
   }
 
