@@ -3,15 +3,15 @@ import { DragDropContext } from 'react-dnd'
 import MouseBackend from 'react-dnd-mouse-backend'
 import CSV from './CSV'
 import NormalDiv from './NormalDiv'
+import MultipleTargets from './MultipleTargets'
 
 const App = React.createClass({
   render() {
     return (
-      <div>
-        <h3>CSV Elements</h3>
+      <div style={{ display: 'flex', height: '50vh', justifyContent: 'space-between' }}>
         <CSV/>
-        <h3>Normal Div</h3>
         <NormalDiv/>
+        <MultipleTargets />
       </div>
     )
   }

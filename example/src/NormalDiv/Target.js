@@ -8,7 +8,8 @@ const styles = {
   width: 300,
   height: 300,
   border: '1px solid black',
-  position: 'relative'
+  position: 'relative',
+  flex: 1
 }
 
 const boxTarget = {

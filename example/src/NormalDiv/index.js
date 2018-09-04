@@ -19,7 +19,8 @@ const DragAroundNaive = React.createClass({
     const { hideSourceOnDrag } = this.state
 
     return (
-      <div>
+      <div><div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+        <h3>Normal Div</h3>
         <Target hideSourceOnDrag={hideSourceOnDrag} />
         <p>
           <label>
@@ -29,7 +30,7 @@ const DragAroundNaive = React.createClass({
             <small>Hide source while dragging</small>
           </label>
         </p>
-      </div>
+      </div></div>
     )
   }
 })

@@ -20,7 +20,8 @@ const DragAroundCSV = React.createClass({
     const { hideSourceOnDrag } = this.state
 
     return (
-      <div>
+      <div><div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+        <h3>CSV Elements</h3>
         <Target hideSourceOnDrag={hideSourceOnDrag} />
         <p>
           <label>
@@ -30,7 +31,7 @@ const DragAroundCSV = React.createClass({
             <small>Hide source while dragging</small>
           </label>
         </p>
-      </div>
+      </div></div>
     )
   }
 })

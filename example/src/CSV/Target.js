@@ -8,7 +8,8 @@ const styles = {
   width: 300,
   height: 300,
   border: '1px solid black',
-  position: 'relative'
+  position: 'relative',
+  flex: 1
 }
 
 const boxTarget = {
@@ -74,6 +75,7 @@ Target.propTypes = {
   connectDropTarget: PropTypes.func.isRequired
 }
 
-export default DropTarget(ItemTypes.CSV, boxTarget, connect => ({
-  connectDropTarget: connect.dropTarget()
+export default DropTarget(ItemTypes.CSV, boxTarget, (connect, monitor) => ({
+  connectDropTarget: connect.dropTarget(),
+  isOver: monitor.isOver(),
 }))(Target)
