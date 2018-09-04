@@ -30,4 +30,4 @@ Then head to `http://localhost:3030/` to start some fun drag and dropping.
 
 
 ### Credits
-Inspired by [HTML5 Backend](https://github.com/gaearon/react-dnd-html5-backend) & [Touch Backend](https://github.com/yahoo/react-dnd-touch-backend) to support only mouse events.
+Inspired by [HTML5 Backend](https://github.com/gaearon/react-dnd-html5-backend) & [Touch Backend](https://github.com/yahoo/react-dnd-touch-backend) to support only mouse events, which work much better in some cases, like svg.
