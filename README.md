@@ -15,5 +15,17 @@ const App = {...}
 const AppContainer = DragDropContext(MouseBackEnd)(App)
 ```
 
+### Playground
+
+First, prepare the playground:
+
+```sh
+cd example;
+yarn; yarn start
+```
+
+Then head to `http://localhost:3030/` to start some fun drag and dropping.
+
+
 ### Credits
 Inspired by [HTML5 Backend](https://github.com/gaearon/react-dnd-html5-backend) & [Touch Backend](https://github.com/yahoo/react-dnd-touch-backend) to support only mouse events.
