@@ -1,5 +1,7 @@
 # react-dnd-mouse-backend
 
+<img width="968" alt="capture d ecran 2018-09-04 a 23 45 18" src="https://user-images.githubusercontent.com/6483446/45059589-cae21100-b09c-11e8-8925-c838182196d7.png">
+
 [![npm version](https://badge.fury.io/js/react-dnd-mouse-backend.svg)](https://badge.fury.io/js/react-dnd-mouse-backend)
 
 Mouse Backend for React Drag and Drop library http://gaearon.github.io/react-dnd
