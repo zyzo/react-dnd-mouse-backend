@@ -4,6 +4,7 @@ import MouseBackend from 'react-dnd-mouse-backend'
 import CSV from './CSV'
 import NormalDiv from './NormalDiv'
 import MultipleTargets from './MultipleTargets'
+import WithDragPreview from './WithDragPreview'
 
 const App = React.createClass({
   render() {
@@ -12,6 +13,7 @@ const App = React.createClass({
         <CSV/>
         <NormalDiv/>
         <MultipleTargets />
+        <WithDragPreview />
       </div>
     )
   }

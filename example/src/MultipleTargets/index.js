@@ -14,8 +14,7 @@ const DragAroundNaive = React.createClass({
         'c': { top: 90, left: 40, title: '0' },
         'd': { top: 230, left: 160, title: '0' },
         'e': { top: 140, left: 150, title: '0' }
-      },
-      hideSourceOnDrag: true
+      }
     }
   },
 
@@ -37,14 +36,8 @@ const DragAroundNaive = React.createClass({
     return Object.values(this.state.boxes).filter(box => box.title === id).length >= 1
   },
 
-  handleHideSourceClick() {
-    this.setState({
-      hideSourceOnDrag: !this.state.hideSourceOnDrag
-    })
-  },
-
   render() {
-    const { hideSourceOnDrag, boxes } = this.state
+    const { boxes } = this.state
 
     return (
       <div><div style={{
@@ -53,17 +46,9 @@ const DragAroundNaive = React.createClass({
         <h3>Multiple Drop Targets</h3>
         <div style={{ position: 'relative', width: '300px',
           height: '300px', border: '1px solid black' }}>
-          <Sources hideSourceOnDrag={hideSourceOnDrag} boxes={boxes} />
+          <Sources hideSourceOnDrag={true} boxes={boxes} />
           <Targets moveBox={this.moveBox} isOccupied={this.isOccupied} />
         </div>
-        <p>
-          <label>
-            <input type="checkbox"
-                   checked={hideSourceOnDrag}
-                   onChange={this.handleHideSourceClick} />
-            <small>Hide source while dragging</small>
-          </label>
-        </p>
       </div></div>
     )
   }
