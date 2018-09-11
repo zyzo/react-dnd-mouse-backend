@@ -18,19 +18,16 @@
   },
   "keywords": [
     "react",
-    "html5",
+    "mouse",
     "dragndrop",
     "svg"
   ],
-  "author": "zyzo",
+  "author": "danghaian168@gmail.com",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/zyzo/react-dnd-mouse-backend/issues"
   },
   "homepage": "https://github.com/zyzo/react-dnd-mouse-backend#readme",
-  "peerDependencies": {
-    "react-dnd": ">=2.1.2"
-  },
   "devDependencies": {
     "babel": "^6.5.2",
     "babel-cli": "^6.6.5",
