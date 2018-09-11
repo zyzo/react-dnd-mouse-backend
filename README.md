@@ -1,6 +1,6 @@
 # react-dnd-mouse-backend
 
-<img width="1280" alt="capture d ecran 2018-09-11 a 21 56 21" src="https://user-images.githubusercontent.com/6483446/45384695-fe79e980-b60e-11e8-93d7-49dd8a100a12.png">
+<img width="1280" alt="capture d ecran 2018-09-11 a 22 08 09" src="https://user-images.githubusercontent.com/6483446/45384770-3b45e080-b60f-11e8-973c-ee112d8a4129.png">
 
 [![npm version](https://badge.fury.io/js/react-dnd-mouse-backend.svg)](https://badge.fury.io/js/react-dnd-mouse-backend)
 
