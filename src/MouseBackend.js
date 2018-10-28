@@ -20,6 +20,15 @@ function getNodeClientOffset (node) {
   return { x: left, y: top }
 }
 
+function isRightClick (e) {
+  if ('which' in e) {
+    return e.which === 3
+  } else if ('button' in e) {
+    return e.button === 2
+  }
+  return false
+}
+
 export default class MouseBackend {
   constructor(manager) {
     this.actions = manager.getActions()
@@ -44,6 +53,10 @@ export default class MouseBackend {
       this.handleWindowMoveCapture.bind(this)
     this.handleWindowMoveEndCapture =
       this.handleWindowMoveEndCapture.bind(this)
+    this.handleWindowClick =
+      this.handleWindowClick.bind(this)
+    this.handleWindowDragstart =
+      this.handleWindowDragstart.bind(this)
   }
 
   setup() {
@@ -64,6 +77,10 @@ export default class MouseBackend {
       this.handleWindowMoveCapture, true)
     window.addEventListener('mouseup',
       this.handleWindowMoveEndCapture, true)
+    window.addEventListener('click',
+      this.handleWindowClick, true)
+    window.addEventListener('dragstart',
+      this.handleWindowDragstart, true)
   }
 
   getSourceClientOffset (sourceId) {
@@ -86,6 +103,10 @@ export default class MouseBackend {
       'mousemove', this.handleWindowMoveCapture, true)
     window.removeEventListener(
       'mouseup', this.handleWindowMoveEndCapture, true)
+    window.removeEventListener(
+      'click', this.handleWindowClick, true)
+    window.removeEventListener(
+      'dragstart', this.handleWindowDragstart, true)
   }
 
   connectDragSource(sourceId, node) {
@@ -124,7 +145,9 @@ export default class MouseBackend {
     this.moveStartSourceIds = []
   }
 
-  handleMoveStart (sourceId) {
+  handleMoveStart (sourceId, e) {
+    // Ignore right mouse button.
+    if (isRightClick(e)) return
     this.moveStartSourceIds.unshift(sourceId)
   }
 
@@ -185,6 +208,7 @@ export default class MouseBackend {
       this.moveStartSourceIds = null
       return
     }
+    this.preventClick = true
 
     e.preventDefault()
 
@@ -193,6 +217,16 @@ export default class MouseBackend {
     this.uninstallSourceNodeRemovalObserver()
     this.actions.drop()
     this.actions.endDrag()
+  }
+
+  handleWindowClick(e) {
+    if (this.preventClick) e.stopPropagation()
+    this.preventClick = false
+  }
+
+  // Disable drag on images (Firefox)
+  handleWindowDragstart(e) {
+    e.preventDefault()
   }
 
   installSourceNodeRemovalObserver (node) {

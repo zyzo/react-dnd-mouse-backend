@@ -6,6 +6,11 @@
 
 Mouse Backend for React Drag and Drop library http://gaearon.github.io/react-dnd
 
+- [Usage](#Usage)
+- [Playground](#Playground)
+- [Development](#Development)
+- [Credits](#Credits)
+
 ### Usage
 
 ```js
@@ -27,6 +32,30 @@ yarn; yarn start
 ```
 
 Then head to `http://localhost:3030/` to start some fun drag and dropping.
+
+### Development
+
+First, install the project locally:
+
+```sh
+git clone git@github.com:zyzo/react-dnd-mouse-backend.git
+cd react-dnd-mouse-backend; npm install
+# (Optional) prepare example project
+cd example; npm install
+```
+
+Then, link react-dnd-mouse-backend to example project (or your js project):
+```sh
+# in ./react-dnd-mouse-backend
+npm link
+cd example; npm link react-dnd-mouse-backend
+```
+
+Finally you can begin to make changes in `src` folder, and rebuild the lib:
+
+```sh
+npm run build
+```
 
 
 ### Credits
