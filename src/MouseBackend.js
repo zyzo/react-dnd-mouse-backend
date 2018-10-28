@@ -20,6 +20,15 @@ function getNodeClientOffset (node) {
   return { x: left, y: top }
 }
 
+function isRightClick (e) {
+  if ('which' in e) {
+    return e.which === 3
+  } else if ('button' in e) {
+    return e.button === 2
+  }
+  return false
+}
+
 export default class MouseBackend {
   constructor(manager) {
     this.actions = manager.getActions()
@@ -138,7 +147,7 @@ export default class MouseBackend {
 
   handleMoveStart (sourceId, e) {
     // Ignore right mouse button.
-    if (e.which === 3) return
+    if (isRightClick(e)) return
     this.moveStartSourceIds.unshift(sourceId)
   }
 
