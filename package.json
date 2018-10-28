@@ -1,6 +1,6 @@
 {
   "name": "react-dnd-mouse-backend",
-  "version": "0.1.2",
+  "version": "1.0.0-rc.1",
   "description": "A lightweight attempt for solving the whole HTML5 DnD - svg tags compability issue",
   "main": "lib/index.js",
   "scripts": {
