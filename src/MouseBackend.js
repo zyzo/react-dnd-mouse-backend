@@ -1,3 +1,4 @@
+import { createNativeDragSource, matchNativeItemType } from './NativeDragSources'
 
 function getEventClientOffset (e) {
   return {
@@ -42,6 +43,8 @@ export default class MouseBackend {
     this.targetNodes = {}
     this.targetNodeOptions = {}
     this.mouseClientOffset = {}
+    this.currentNativeSource = null;
+    this.currentNativeHandle = null;
 
     this.getSourceClientOffset = this.getSourceClientOffset.bind(this)
 
@@ -57,6 +60,10 @@ export default class MouseBackend {
       this.handleWindowClick.bind(this)
     this.handleWindowDragstart =
       this.handleWindowDragstart.bind(this)
+    this.handleWindowNativeDrag =
+      this.handleWindowNativeDrag.bind(this)
+    this.handleWindowNativeEndDrag =
+      this.handleWindowNativeEndDrag.bind(this)
   }
 
   setup() {
@@ -81,6 +88,12 @@ export default class MouseBackend {
       this.handleWindowClick, true)
     window.addEventListener('dragstart',
       this.handleWindowDragstart, true)
+    window.addEventListener('dragover',
+      this.handleWindowNativeDrag, true)
+    window.addEventListener('dragleave',
+      this.handleWindowNativeEndDrag, true)
+    window.addEventListener('drop',
+      this.handleWindowNativeEndDrag, true)
   }
 
   getSourceClientOffset (sourceId) {
@@ -107,6 +120,12 @@ export default class MouseBackend {
       'click', this.handleWindowClick, true)
     window.removeEventListener(
       'dragstart', this.handleWindowDragstart, true)
+    window.removeEventListener(
+      'dragover', this.handleWindowNativeDrag, true)
+    window.removeEventListener(
+      'dragleave', this.handleWindowNativeEndDrag, true)
+    window.removeEventListener(
+      'drop', this.handleWindowNativeEndDrag, true)
   }
 
   connectDragSource(sourceId, node) {
@@ -187,7 +206,15 @@ export default class MouseBackend {
 
     e.preventDefault()
 
-    const matchingTargetIds = Object.keys(this.targetNodes)
+    const matchingTargetIds = this.getMatchingTargetIds(clientOffset)
+
+    this.actions.hover(matchingTargetIds, {
+      clientOffset
+    })
+  }
+
+  getMatchingTargetIds(clientOffset) {
+    return Object.keys(this.targetNodes)
       .filter((targetId) =>
       {
         const boundingRect =
@@ -197,10 +224,6 @@ export default class MouseBackend {
           clientOffset.y >= boundingRect.top &&
           clientOffset.y <= boundingRect.bottom
       })
-
-    this.actions.hover(matchingTargetIds, {
-      clientOffset
-    })
   }
 
   handleWindowMoveEndCapture (e) {
@@ -265,4 +288,54 @@ export default class MouseBackend {
     this.draggedSourceNode = null
   }
 
+  handleWindowNativeDrag(e) {
+    const nativeType = matchNativeItemType(e.dataTransfer)
+    if (!nativeType) {
+      return
+    }
+
+    if (!this.monitor.isDragging()) {
+      const SourceType = createNativeDragSource(nativeType)
+      this.currentNativeSource = new SourceType()
+      this.currentNativeHandle = this.registry.addSource(
+        nativeType,
+        this.currentNativeSource
+      )
+
+      this.actions.beginDrag([this.currentNativeHandle])
+    }
+
+    const clientOffset = getEventClientOffset(e)
+    this.actions.publishDragSource()
+    e.preventDefault()
+    e.dataTransfer.dropEffect = 'copy';
+
+    const matchingTargetIds = this.getMatchingTargetIds(clientOffset)
+    this.actions.hover(matchingTargetIds, {
+      clientOffset
+    })
+  }
+
+  handleWindowNativeEndDrag(e) {
+    const nativeType = matchNativeItemType(e.dataTransfer)
+    if (!nativeType) {
+      return null
+    }
+
+    if (e.type !== 'drop' && e.relatedTarget !== null) {
+      return
+    }
+
+    if (e.type == 'drop') {
+      e.preventDefault()
+      this.currentNativeSource.mutateItemByReadingDataTransfer(e.dataTransfer)
+      this.actions.drop()
+    }
+
+    this.actions.endDrag()
+    this.registry.removeSource(this.currentNativeHandle)
+
+    this.currentNativeSource = null
+    this.currentNativeHandle = null
+  }
 }
