@@ -170,6 +170,11 @@ export default class MouseBackend {
       this.mouseClientOffset.y !== clientOffset.y
     )) {
       this.moveStartSourceIds = null
+
+      this.actions.initCoords(moveStartSourceIds || [], {
+        getSourceClientOffset: this.getSourceClientOffset,
+        clientOffset: this.mouseClientOffset
+      })
       this.actions.beginDrag(moveStartSourceIds, {
         clientOffset: this.mouseClientOffset,
         getSourceClientOffset: this.getSourceClientOffset,
