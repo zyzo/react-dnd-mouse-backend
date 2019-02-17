@@ -75,6 +75,6 @@ Target.propTypes = {
   connectDropTarget: PropTypes.func.isRequired
 }
 
-export default DropTarget(ItemTypes.BOX, boxTarget, connect => ({
+export default DropTarget(ItemTypes.BOX, boxTarget, (connect) => ({
   connectDropTarget: connect.dropTarget()
 }))(Target)
