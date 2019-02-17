@@ -6,7 +6,7 @@ const DragAroundNaive = React.createClass({
   render() {
 
     return (
-      <div><div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+      <div style={{ flex: 1 }}><div style={{ display: 'flex', flexDirection: 'column', }}>
         <h3>Normal Div</h3>
         <Target hideSourceOnDrag={true} />
       </div></div>
