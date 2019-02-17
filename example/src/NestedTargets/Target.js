@@ -22,10 +22,6 @@ const boxTarget = {
 
 const Target = React.createClass({
   moveBox(id, left, top) {
-    if (this.props.isOccupied()) {
-      alert('This box is occupied !')
-      return
-    }
     this.props.moveBox(id, left, top, this.props.id)
   },
   render() {

@@ -10,7 +10,7 @@ const DragAroundCSV = React.createClass({
 
     return (
       <div style={{ flex: 1 }}><div style={{ display: 'flex', flexDirection: 'column', }}>
-        <h3>With Drag Preview</h3>
+        <h3>Custom Drag Preview</h3>
         <Target hideSourceOnDrag={true} />
         <DragPreview />
       </div></div>
