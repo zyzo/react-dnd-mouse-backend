@@ -1,7 +1,8 @@
-var webpack = require('webpack');
+const webpack = require('webpack')
 
 module.exports = {
   entry: './lib/index',
+  devtool: 'cheap-source-map',
   module: {
     loaders: [
       { test: /\.js$/, exclude: /node_modules/, loader: 'babel' }

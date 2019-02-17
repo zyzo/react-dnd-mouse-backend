@@ -1,16 +1,4 @@
 {
-  "presets": ["es2015", "react"],
-  "plugins": [
-    "transform-es2015-function-name",
-    "transform-es2015-arrow-functions",
-    "transform-es2015-parameters",
-    ["transform-es2015-destructuring", { "loose": true }],
-    "transform-es2015-block-scoping",
-    "transform-object-rest-spread"
-  ],
-  "env": {
-    "development": {
-      "presets": ["react-hmre"]
-    }
-  }
+  "presets": ["@babel/preset-env", "@babel/preset-react"],
+  "plugins": []
 }

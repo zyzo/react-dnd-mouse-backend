@@ -9,11 +9,11 @@ const DragAroundNaive = React.createClass({
   getInitialState() {
     return {
       boxes: {
-        'a': { top: 50, left: 140, title: '0' },
-        'b': { top: 180, left: 20, title: '0' },
-        'c': { top: 90, left: 40, title: '0' },
-        'd': { top: 230, left: 160, title: '0' },
-        'e': { top: 140, left: 150, title: '0' }
+        'a': { top: 50, left: 10, title: '0' },
+        'b': { top: 180, left: 10, title: '0' },
+        'c': { top: 90, left: 10, title: '0' },
+        'd': { top: 230, left: 10, title: '0' },
+        'e': { top: 140, left: 10, title: '0' }
       }
     }
   },
@@ -43,11 +43,15 @@ const DragAroundNaive = React.createClass({
       <div style={{ flex: 1 }}><div style={{
         display: 'flex', flexDirection: 'column',
       }}>
-        <h3>Multiple Drop Targets</h3>
-        <div style={{ position: 'relative', width: '300px',
-          height: '300px', border: '1px solid black' }}>
-          <Sources hideSourceOnDrag={true} boxes={boxes} />
-          <Targets moveBox={this.moveBox} isOccupied={this.isOccupied} />
+        <h3>Nested Drop Targets</h3>
+        <div style={{ position: 'relative', width: '400px', height: '300px', display: 'flex' }}>
+          <div style={{ width: '100px' }}>
+            <Sources hideSourceOnDrag={true} boxes={boxes} />
+          </div>
+          <div style={{ position: 'relative', width: '300px',
+            height: '300px', border: '1px solid black' }}>
+            <Targets moveBox={this.moveBox} isOccupied={this.isOccupied} />
+          </div>
         </div>
       </div></div>
     )
