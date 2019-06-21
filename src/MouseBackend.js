@@ -175,16 +175,10 @@ export default class MouseBackend {
 
     e.preventDefault()
 
-    const matchingTargetIds = Object.keys(this.targetNodes)
-      .filter((targetId) =>
-      {
-        const boundingRect =
-          this.targetNodes[targetId].getBoundingClientRect()
-        return clientOffset.x >= boundingRect.left &&
-          clientOffset.x <= boundingRect.right &&
-          clientOffset.y >= boundingRect.top &&
-          clientOffset.y <= boundingRect.bottom
-      })
+    const matchingTargetIds = Object.entries(this.targetNodes)
+      .filter(([, node]) => node.contains(e.toElement))
+      .sort(([, nodeA], [, nodeB]) => (nodeA.contains(nodeB) ? -1 : 1))
+      .map(([id]) => id);
 
     this.actions.hover(matchingTargetIds, {
       clientOffset
