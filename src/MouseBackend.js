@@ -176,9 +176,9 @@ export default class MouseBackend {
     e.preventDefault()
 
     const matchingTargetIds = Object.entries(this.targetNodes)
-      .filter(([, node]) => node.contains(e.toElement))
+      .filter(([, node]) => node.contains(e.target))
       .sort(([, nodeA], [, nodeB]) => (nodeA.contains(nodeB) ? -1 : 1))
-      .map(([id]) => id);
+      .map(([id]) => id)
 
     this.actions.hover(matchingTargetIds, {
       clientOffset
